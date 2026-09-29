@@ -87,8 +87,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK command-line tools
-        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3.2.1
+      - name: Accept Android SDK licenses
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
 
       - name: Install pinned Google Play CLI
         shell: bash
@@ -237,8 +240,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK command-line tools
-        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3.2.1
+      - name: Accept Android SDK licenses
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
 
       - name: Set up pinned Rust Android toolchain
         working-directory: ${{ github.workspace }}
@@ -313,8 +319,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK command-line tools
-        uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3.2.1
+      - name: Accept Android SDK licenses
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
 
       - name: Install pinned Rust and Android native toolchains
         shell: bash
@@ -404,7 +413,11 @@ jobs:
           ref: ${{ inputs.release_sha || github.sha }}
       - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.7.0
         with: { distribution: temurin, java-version: '17' }
-      - uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3.2.1
+      - name: Accept Android SDK licenses
+        shell: bash
+        run: |
+          set -euo pipefail
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
       - uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
       - name: Enable KVM access
         run: sudo chmod 666 /dev/kvm
